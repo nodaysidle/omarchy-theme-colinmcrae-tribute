@@ -40,7 +40,7 @@ hl.config({
     },
     gaps_in = 6,
     gaps_out = 14,
-    border_size = 3,
+    border_size = 4,
   },
 
   group = {
