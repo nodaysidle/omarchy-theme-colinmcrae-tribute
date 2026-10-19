@@ -2,31 +2,32 @@
 -- Tribute to Colin McRae MBE & Nicky Grist — 1997 Subaru Impreza WRC97 (P2 WRC)
 --
 -- Features:
---   - "The 555 Comet" dynamic continuous rotating border livery (Sonic Blue, 555 Neon Yellow, Speedline Gold, STi Cherry)
+--   - "Night Special Stage" laser sweep: stealth carbon base with focused 555 Yellow + Gold + STi Red beam
 --   - Frosted motorsport glass with illuminated specular inner glow
---   - Superellipse continuous curvature window corners (power 4.5)
+--   - Superellipse continuous curvature window corners (power 4.5, rounding 18)
 --   - Precision layer blurs for Waybar, Walker, and Notifications
 
--- ── 555 Comet Livery Border Gradient ──
+-- ── "Night Special Stage" Laser Sweep Gradient ──
+-- 75% stealth carbon, 25% concentrated high-intensity rally light beam
 local active_border_color = {
   colors = {
-    "rgba(0A2A66F2)", -- Deep World Rally Blue
-    "rgba(1255CCF2)", -- Electric Sonic Blue
-    "rgba(FFF200F2)", -- 555 Neon Yellow Comet Tip
-    "rgba(D4AF37F2)", -- Speedline Magnesium Gold
-    "rgba(FF0055F2)", -- STi Cherry Flash
-    "rgba(1255CCF2)", -- Electric Sonic Blue
-    "rgba(0A2A66F2)", -- Deep World Rally Blue
+    "rgba(070B14F5)", -- Deep Stealth Cockpit Carbon
+    "rgba(0B162EF5)", -- Subtle SWRT Midnight Blue transition
+    "rgba(1255CCEE)", -- SWRT Sonic Blue halo
+    "rgba(D4AF37FF)", -- Speedline Magnesium Gold
+    "rgba(FFF200FF)", -- 555 Pure Neon Laser Tip
+    "rgba(FF0055FF)", -- STi Cherry Red trailing spark
+    "rgba(0B162EF5)", -- Subtle SWRT Midnight Blue transition
+    "rgba(070B14F5)", -- Deep Stealth Cockpit Carbon
   },
   angle = 45,
 }
 
 local inactive_border_color = {
   colors = {
-    "rgba(0A183666)", -- Muted Deep Blue
-    "rgba(D4AF3733)", -- Faint Magnesium Gold
-    "rgba(14182066)", -- Carbon Weave
-    "rgba(0A183666)", -- Muted Deep Blue
+    "rgba(070B1499)", -- Stealth Carbon
+    "rgba(141D3066)", -- Muted SWRT Navy
+    "rgba(070B1499)", -- Stealth Carbon
   },
   angle = 45,
 }
@@ -120,11 +121,11 @@ hl.config({
   },
 })
 
--- ── 555 Comet Smooth Continuous Loop Animation ──
+-- ── Laser Sweep Smooth Continuous Loop Animation ──
 hl.animation({
   leaf = "borderangle",
   enabled = true,
-  speed = 50, -- Smooth continuous rotation (~8s per loop)
+  speed = 36, -- Crisp purposeful sweep (~5.5s per loop)
   bezier = "linear",
   style = "loop",
 })
@@ -137,10 +138,7 @@ hl.animation({ leaf = "layersIn", enabled = true, speed = 3.5, bezier = "glassSe
 hl.animation({ leaf = "layersOut", enabled = true, speed = 2, bezier = "glassDismiss", style = "fade" })
 
 -- ── Window Translucency Rules ──
--- Terminals manage internal alpha and preserve opaque glyphs
 o.window({ tag = "terminal" }, { tag = "-default-opacity", opacity = "1.0 1.0" })
-
--- General applications retain comfortable reading contrast
 o.window({ tag = "default-opacity" }, { opacity = "0.93 0.90" })
 o.window({ tag = "chromium-based-browser" }, { opacity = "0.93 0.90" })
 o.window({ tag = "firefox-based-browser" }, { opacity = "0.93 0.90" })
