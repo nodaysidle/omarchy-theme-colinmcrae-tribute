@@ -24,38 +24,47 @@ Extracted directly from high-resolution studio and stage photography of `P2 WRC`
 
 ---
 
-## ⚡ The "555 Comet" Moving Borders
+## ⚡ The "Night Special Stage" Laser Sweep Borders
 
-Unlike static window borders, Colin McRae Tribute features a multi-stop rotating gradient that sweeps around active windows at a smooth, continuous velocity:
+Unlike static window borders, Colin McRae Tribute features a 4px illuminated laser sweep: 75% stealth cockpit carbon frame that melts into your wallpaper, with a high-intensity 25% beam of SWRT Sonic Blue, Speedline Magnesium Gold, 555 Neon Yellow, and STi Cherry Red sweeping around active windows:
 
 ```lua
 active_border = {
   colors = {
-    "rgba(0A2A66F2)", -- Deep World Rally Blue
-    "rgba(1255CCF2)", -- Electric Sonic Blue
-    "rgba(FFF200F2)", -- 555 Neon Yellow Comet Tip
-    "rgba(D4AF37F2)", -- Speedline Magnesium Gold
-    "rgba(FF0055F2)", -- STi Cherry Flash
-    "rgba(1255CCF2)", -- Electric Sonic Blue
-    "rgba(0A2A66F2)", -- Deep World Rally Blue
+    "rgba(070B14F5)", -- Deep Stealth Cockpit Carbon
+    "rgba(0B162EF5)", -- Subtle SWRT Midnight Blue transition
+    "rgba(1255CCEE)", -- SWRT Sonic Blue halo
+    "rgba(D4AF37FF)", -- Speedline Magnesium Gold
+    "rgba(FFF200FF)", -- 555 Pure Neon Laser Tip
+    "rgba(FF0055FF)", -- STi Cherry Red trailing spark
+    "rgba(0B162EF5)", -- Subtle SWRT Midnight Blue transition
+    "rgba(070B14F5)", -- Deep Stealth Cockpit Carbon
   },
   angle = 45,
 }
 ```
 
-* **Animation:** Loop animation on `borderangle` (`speed = 50`) creating a continuous 555 comet effect.
-* **Inactive Windows:** Muted carbon weave with faint Speedline Gold corner reflections (`rgba(D4AF3733)`).
+* **Animation:** Loop animation on `borderangle` (`speed = 36`) creating a crisp, high-speed rally night stage auxiliary lamp sweep.
+* **Border Size:** `4px` illuminated beam for maximum presence against frosted dark glass.
+* **Inactive Windows:** Muted stealth carbon weave with faint navy transition (`rgba(070B1499)`).
 
 ---
 
-## 🏎️ Surface Design & Frosted Glass
+## 🏎️ Bar Widgets & Custom Plugins
 
-1. **Hyprland:** Superellipse continuous-curvature corners (`rounding = 18`, `power = 4.5`), specular inner rim reflection (`glow` with gold/sonic tint), and 3-pass high-vibrancy backdrop blur.
-2. **Waybar:** Floating pill with deep Sonic Blue translucent gradient, Speedline Gold hairline edge, and glowing 555 Neon Yellow active workspace indicator.
-3. **Ghostty & Terminals:** 84% translucent midnight blue background with 20px blur, vibrant Subaru WRC ANSI palette, and a 555 yellow block cursor.
-4. **Walker Launcher:** Glass acrylic panel with gold bevel, recessed search well, and glowing neon yellow selection.
-5. **Mako Notifications & SwayOSD:** Frosted popups with Speedline Gold borders and yellow progress indicators (`[urgency=high]` fires with STi Cherry Red).
-6. **Btop:** Transparent terminal passthrough styled after MoTeC rally telemetry.
+Included directly in the theme repository:
+
+1. **`colinmcrae.wrc-badge`**: Centered tribute badge featuring the authentic **P2 WRC Subaru World Rally Team crescent emblem** (with 3D cyan extrusion) alongside 555 insignia and STi red racing tab. Left-click fires Colin's iconic *"If in doubt, flat out"* notification.
+2. **`colinmcrae.workspaces`**: Clean, borderless workspace switcher with native optical alignment:
+   - **Active:** Gleaming **Speedline Gold (`#D4AF37`)**
+   - **Occupied:** Warm **Muted Gold (`#C5A059`)**
+   - **Unused:** Soft **SWRT Rally Blue (`#3B6DB5`)**
+3. **Hyprland:** Superellipse continuous-curvature corners (`rounding = 18`, `power = 4.5`), specular inner rim reflection (`glow` with gold/sonic tint), and 3-pass high-vibrancy backdrop blur.
+4. **Waybar:** Floating pill with deep Sonic Blue translucent gradient, Speedline Gold hairline edge, and glowing 555 Neon Yellow active workspace indicator.
+5. **Ghostty & Terminals:** 84% translucent midnight blue background with 20px blur, vibrant Subaru WRC ANSI palette, and a 555 yellow block cursor.
+6. **Walker Launcher:** Glass acrylic panel with gold bevel, recessed search well, and glowing neon yellow selection.
+7. **Mako Notifications & SwayOSD:** Frosted popups with Speedline Gold borders and yellow progress indicators (`[urgency=high]` fires with STi Cherry Red).
+8. **Btop:** Transparent terminal passthrough styled after MoTeC rally telemetry.
 
 ---
 
