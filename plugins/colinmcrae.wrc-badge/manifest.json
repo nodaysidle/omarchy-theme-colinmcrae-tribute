@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "colinmcrae.wrc-badge",
+  "name": "555 WRC Badge",
+  "version": "1.0.0",
+  "author": "nodaysidle",
+  "license": "MIT",
+  "description": "555 State of Art World Rally Championship tribute badge for Omarchy bar",
+  "kinds": [
+    "bar-widget"
+  ],
+  "activation": "on-demand",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "555 WRC Badge",
+    "description": "Subaru World Rally Team 555 Badge",
+    "category": "Status",
+    "allowMultiple": false,
+    "defaultSection": "center"
+  }
+}
