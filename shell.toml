@@ -1,0 +1,102 @@
+# Omarchy shell surfaces for Colin McRae Tribute Theme
+# SWRT World Rally Blue, Speedline Gold, 555 Neon Yellow, STi Red
+
+[bar]
+# Deep Cockpit Carbon with tinted Rally Blue tone
+background       = "#070B14"
+background-alpha = 0.88
+# SWRT Speedline Gold / Monte Carlo White tinted text instead of cold harsh white
+text             = "#D4AF37"
+# Active / urgent alert color = STi Cherry Red
+active           = "#FF0055"
+scale-with-font  = true
+size-horizontal  = 26
+size-vertical    = 28
+
+[hyprland]
+active-border            = "#1255CC"
+active-border-foreground = "#FFF200"
+
+[controls]
+# Normal controls in SWRT blue/gold accent
+normal-color        = "#70B8FF"
+normal-fill-alpha   = 0.05
+normal-border       = "#1255CC"
+normal-border-width = 1
+normal-border-alpha = 0.35
+
+# Hover cursor glows into 555 Racing Yellow
+hover-cursor-color        = "#FFF200"
+hover-cursor-fill-alpha   = 0.14
+hover-cursor-border       = "#FFF200"
+hover-cursor-border-width = 1
+hover-cursor-border-alpha = 0.60
+
+focus-color        = "#FFF200"
+focus-fill-alpha   = 0.14
+focus-border       = "#FFF200"
+focus-border-width = 1
+focus-border-alpha = 0.60
+
+# Selected states gleam in Speedline Gold
+selected-color        = "#D4AF37"
+selected-fill-alpha   = 0.24
+selected-border       = "#D4AF37"
+selected-border-width = 1
+selected-border-alpha = 0.85
+
+pressed-fill-alpha   = 0.30
+selection-fill-alpha = 0.40
+
+[font]
+base-size = 14
+
+[popups]
+background       = "#070B14"
+background-alpha = 0.94
+text             = "#F2F5F8"
+border           = "#D4AF37"
+border-alpha     = 0.80
+
+[tooltip]
+background       = "#04070D"
+background-alpha = 0.96
+text             = "#FFF200"
+border           = "#1255CC"
+border-alpha     = 0.85
+
+[notifications]
+background       = "#070B14"
+background-alpha = 0.95
+text             = "#F2F5F8"
+border           = "#FF0055"
+border-alpha     = 0.90
+countdown        = "#FFF200"
+
+[launcher]
+background                = "#070B14"
+background-alpha          = 0.94
+text                      = "#F2F5F8"
+border                    = "#1255CC"
+border-alpha              = 0.85
+scrim                     = "#04070D"
+scrim-alpha               = 0.65
+selected-background       = "#1255CC"
+selected-background-alpha = 0.20
+selected-text             = "#FFF200"
+selected-border           = "#FFF200"
+selected-border-alpha     = 0.70
+
+[menu]
+background                = "#070B14"
+background-alpha          = 0.94
+text                      = "#F2F5F8"
+border                    = "#1255CC"
+border-alpha              = 0.85
+scrim                     = "#04070D"
+scrim-alpha               = 0.65
+selected-background       = "#1255CC"
+selected-background-alpha = 0.20
+selected-text             = "#FFF200"
+selected-border           = "#FFF200"
+selected-border-alpha     = 0.70

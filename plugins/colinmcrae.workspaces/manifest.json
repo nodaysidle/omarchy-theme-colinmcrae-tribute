@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "colinmcrae.workspaces",
+  "name": "McRae Rally Workspaces",
+  "version": "1.0.0",
+  "author": "nodaysidle",
+  "license": "MIT",
+  "description": "Speedline Gold and SWRT Blue styled Hyprland workspace switcher",
+  "kinds": [
+    "bar-widget"
+  ],
+  "activation": "on-demand",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "McRae Workspaces",
+    "description": "Custom styled workspace switcher",
+    "category": "Status",
+    "allowMultiple": false,
+    "defaultSection": "left"
+  }
+}
