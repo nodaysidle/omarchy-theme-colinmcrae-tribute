@@ -58,17 +58,17 @@ BarWidget {
         readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
         bar: root.bar
-        // Clean numeric digits 1, 2, 3... perfectly aligned with the clock and weather text
+        // Clean numeric digits 1, 2, 3...
         text: modelData === 10 ? "0" : String(modelData)
 
-        // Color scheme:
-        // Focused/Active: Speedline Gold (#D4AF37)
-        // Occupied (windows running): SWRT Light Cyan/Blue (#70B8FF)
-        // Empty: Muted Rally Blue (#3B5377)
-        foreground: focused ? "#D4AF37" : (occupied ? "#70B8FF" : "#3B5377")
+        // Exact requested color scheme:
+        // - Active/Focused (current desktop): Bright Speedline Gold (#D4AF37)
+        // - Occupied with background windows (e.g. desktop 3): Muted Gold (#C5A059 / #B38F46)
+        // - Empty / Unused desktops: SWRT Rally Blue (#2B5B9E / #3B6DB5)
+        foreground: focused ? "#D4AF37" : (occupied ? "#C5A059" : "#3B6DB5")
 
-        // No box, no square, pure text numbers with native BarWidget alignment
-        opacity: focused || occupied ? 1.0 : 0.45
+        // Pure numbers, zero boxes, zero squares
+        opacity: focused ? 1.0 : (occupied ? 0.90 : 0.55)
         horizontalMargin: 6
         verticalPadding: 6
         fixedWidth: root.vertical ? root.barSize : Style.space(20)
