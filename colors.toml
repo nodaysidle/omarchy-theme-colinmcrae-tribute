@@ -1,0 +1,34 @@
+# Colin McRae Tribute Theme for Omarchy v4
+# Tribute to Colin McRae MBE & Nicky Grist — Subaru Impreza WRC97 (P2 WRC)
+mode = "dark"
+
+accent = "#1255CC"
+selection = "#1B3B6F"
+selection_foreground = "#F4F6FB"
+muted = "#4C6B99"
+
+background = "#0B101D"
+dark_background = "#070B14"
+darker_background = "#04070D"
+lighter_background = "#141D30"
+
+foreground = "#F2F5F8"
+dark_foreground = "#A6B4C9"
+light_foreground = "#F8FAFC"
+bright_foreground = "#FFFFFF"
+
+red = "#FF0055"
+yellow = "#FFF200"
+orange = "#FF8C00"
+green = "#00E676"
+cyan = "#00D2FF"
+blue = "#1255CC"
+magenta = "#E040FB"
+brown = "#C5A059"
+
+bright_red = "#FF3377"
+bright_yellow = "#FFFF66"
+bright_green = "#69F0AE"
+bright_cyan = "#80E5FF"
+bright_blue = "#4D88FF"
+bright_magenta = "#EA80FC"

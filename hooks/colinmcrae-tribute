@@ -1,0 +1,147 @@
+#!/bin/bash
+#
+# Colin McRae Tribute — Omarchy Theme Hook
+# Installed to ~/.config/omarchy/hooks/theme-set.d/colinmcrae-tribute
+#
+# Applies/reverts Hyprland lua config, GTK glass shims, and terminal alpha.
+
+set -euo pipefail
+
+THEME="${1:-}"
+STATE="${XDG_STATE_HOME:-$HOME/.local/state}/colinmcrae-tribute"
+HYPRLAND="$HOME/.config/hypr/hyprland.lua"
+HYPRLOCK="$HOME/.config/hypr/hyprlock.conf"
+CURRENT_THEME_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/current/theme"
+
+THEME_DIR="$HOME/.config/omarchy/themes/colinmcrae-tribute"
+if [[ ! -d "$THEME_DIR" && -d "$HOME/dev/nodaysidle/omarchy-theme-colinmcrae-tribute" ]]; then
+  THEME_DIR="$HOME/dev/nodaysidle/omarchy-theme-colinmcrae-tribute"
+fi
+
+GTK4_CSS="$HOME/.config/gtk-4.0/gtk.css"
+GTK3_CSS="$HOME/.config/gtk-3.0/gtk.css"
+SHIM4='@import url("../omarchy/current/theme/gtk.css");'
+SHIM3='@import url("../omarchy/current/theme/gtk3.css");'
+
+mkdir -p "$STATE"
+
+add_import() {
+  local file=$1 line=$2 tmp
+  mkdir -p "$(dirname "$file")"
+
+  if [[ ! -f $file ]]; then
+    printf '%s\n' "$line" >"$file"
+    return 0
+  fi
+
+  grep -qxF "$line" "$file" && return 0
+
+  tmp="$file.colinmcrae-tribute.$$"
+  { printf '%s\n' "$line"; cat "$file"; } >"$tmp"
+  mv "$tmp" "$file"
+}
+
+remove_import() {
+  local file=$1 line=$2 tmp
+  [[ -f $file ]] || return 0
+  grep -qxF "$line" "$file" || return 0
+
+  tmp="$file.colinmcrae-tribute.$$"
+  grep -vxF "$line" "$file" >"$tmp" || true
+  if [[ -s $tmp ]]; then
+    mv "$tmp" "$file"
+  else
+    rm -f "$tmp" "$file"
+  fi
+}
+
+apply_assets() {
+  [[ -d $THEME_DIR ]] || return 0
+  add_import "$GTK4_CSS" "$SHIM4"
+  [[ -f $THEME_DIR/gtk3.css ]] && add_import "$GTK3_CSS" "$SHIM3"
+}
+
+revert_assets() {
+  remove_import "$GTK4_CSS" "$SHIM4"
+  remove_import "$GTK3_CSS" "$SHIM3"
+}
+
+HYPRLAND_MARK_BEGIN='-- >>> colinmcrae-tribute >>>'
+HYPRLAND_MARK_END='-- <<< colinmcrae-tribute <<<'
+
+apply_hyprland() {
+  [[ -f $HYPRLAND ]] || return 0
+  grep -qxF -- "$HYPRLAND_MARK_BEGIN" "$HYPRLAND" && return 0
+
+  local tmp="$HYPRLAND.colinmcrae-tribute.$$"
+  {
+    cat "$HYPRLAND"
+    if [[ -n $(tail -c 1 "$HYPRLAND") ]]; then printf '\n'; fi
+    printf '%s\n' "$HYPRLAND_MARK_BEGIN"
+    printf '%s\n' '-- Managed by the Colin McRae Tribute theme hook; removed when you switch away.'
+    printf '%s\n' 'do'
+    printf '%s\n' "  local _theme_dir = (os.getenv(\"HOME\") or \"\") .. \"/.config/omarchy/themes/colinmcrae-tribute\""
+    printf '%s\n' "  local _lg = _theme_dir .. \"/hyprland.lua\""
+    printf '%s\n' "  local _dev = (os.getenv(\"HOME\") or \"\") .. \"/dev/nodaysidle/omarchy-theme-colinmcrae-tribute/hyprland.lua\""
+    printf '%s\n' '  local _f = io.open(_lg) or io.open(_dev)'
+    printf '%s\n' '  if _f then'
+    printf '%s\n' '    local _path = _f == io.open(_lg) and _lg or _dev'
+    printf '%s\n' '    _f:close()'
+    printf '%s\n' '    dofile(_path)'
+    printf '%s\n' '  end'
+    printf '%s\n' 'end'
+    printf '%s\n' "$HYPRLAND_MARK_END"
+  } >"$tmp"
+  mv "$tmp" "$HYPRLAND"
+  
+  if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl reload >/dev/null 2>&1 || true
+  fi
+}
+
+revert_hyprland() {
+  [[ -f $HYPRLAND ]] || return 0
+  grep -qxF -- "$HYPRLAND_MARK_BEGIN" "$HYPRLAND" || return 0
+
+  local tmp="$HYPRLAND.colinmcrae-tribute.$$"
+  awk -v begin="$HYPRLAND_MARK_BEGIN" -v end="$HYPRLAND_MARK_END" '
+    $0 == begin { skipping = 1; next }
+    $0 == end   { skipping = 0; next }
+    !skipping   { print }
+  ' "$HYPRLAND" >"$tmp"
+
+  if grep -q '[^[:space:]]' "$tmp"; then
+    mv "$tmp" "$HYPRLAND"
+  else
+    rm -f "$tmp" "$HYPRLAND"
+  fi
+
+  if command -v hyprctl >/dev/null 2>&1; then
+    hyprctl reload >/dev/null 2>&1 || true
+  fi
+}
+
+apply_terminals() {
+  [[ -d $THEME_DIR ]] || return 0
+  [[ -d $CURRENT_THEME_DIR ]] || return 0
+
+  local f copied=0
+  for f in alacritty.toml ghostty.conf kitty.conf; do
+    [[ -f $THEME_DIR/$f ]] || continue
+    cp -f "$THEME_DIR/$f" "$CURRENT_THEME_DIR/$f"
+    copied=1
+  done
+
+  if [[ $copied -eq 1 ]] && command -v omarchy-restart-terminal >/dev/null; then
+    omarchy-restart-terminal >/dev/null 2>&1 || true
+  fi
+}
+
+if [[ $THEME == "colinmcrae-tribute" || $THEME == "colin-mcrae-tribute" ]]; then
+  apply_assets
+  apply_terminals
+  apply_hyprland
+else
+  revert_assets
+  revert_hyprland
+fi

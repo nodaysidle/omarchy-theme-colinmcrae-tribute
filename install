@@ -1,0 +1,44 @@
+#!/bin/bash
+#
+# Colin McRae Tribute — Theme Installer & Linker
+# Tribute to Colin McRae MBE & Nicky Grist — 1997 Subaru Impreza WRC97 (P2 WRC)
+
+set -euo pipefail
+
+THEME_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+TARGET_DIR="$HOME/.config/omarchy/themes/colinmcrae-tribute"
+HOOK_DIR="$HOME/.config/omarchy/hooks/theme-set.d"
+
+echo "=== Colin McRae Tribute Theme Installer ==="
+echo
+
+# 1. Link or copy to Omarchy themes directory
+mkdir -p "$HOME/.config/omarchy/themes"
+if [[ "$THEME_SRC" != "$TARGET_DIR" ]]; then
+  if [[ -L "$TARGET_DIR" || -d "$TARGET_DIR" ]]; then
+    rm -rf "$TARGET_DIR"
+  fi
+  ln -sfn "$THEME_SRC" "$TARGET_DIR"
+  echo "✔ Linked theme: $THEME_SRC -> $TARGET_DIR"
+else
+  echo "✔ Theme is running in situ at $TARGET_DIR"
+fi
+
+# 2. Install theme-set hook
+mkdir -p "$HOOK_DIR"
+install -m 755 "$THEME_SRC/hooks/colinmcrae-tribute" "$HOOK_DIR/colinmcrae-tribute"
+echo "✔ Hook installed: $HOOK_DIR/colinmcrae-tribute"
+
+# 3. Check current theme
+CURRENT="$(cat "${XDG_STATE_HOME:-$HOME/.local/state}/omarchy/current/theme.name" 2>/dev/null || echo '')"
+
+echo
+if [[ "$CURRENT" == "colinmcrae-tribute" ]]; then
+  echo "Theme is already active. Re-applying hook..."
+  bash "$HOOK_DIR/colinmcrae-tribute" "colinmcrae-tribute"
+else
+  echo "Theme registered successfully!"
+  echo "To activate Colin McRae Tribute right now, run:"
+  echo "    omarchy-theme-set colinmcrae-tribute"
+fi
+echo

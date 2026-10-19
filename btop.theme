@@ -1,0 +1,65 @@
+# Colin McRae Tribute — btop Theme
+# Tribute to Colin McRae MBE & Nicky Grist — 1997 Subaru Impreza WRC97 (P2 WRC)
+
+theme[main_bg]=""
+
+theme[main_fg]="#F2F5F8"
+theme[title]="#FFF200"
+theme[hi_fg]="#FFFFFF"
+
+theme[selected_bg]="#1B3B6F"
+theme[selected_fg]="#FFF200"
+
+theme[inactive_fg]="#4C6B99"
+theme[graph_text]="#D4AF37"
+theme[meter_bg]="#141820"
+theme[proc_misc]="#00D2FF"
+
+# Box outlines: Speedline Gold & Sonic Blue
+theme[cpu_box]="#D4AF37"
+theme[mem_box]="#1255CC"
+theme[net_box]="#1255CC"
+theme[proc_box]="#D4AF37"
+
+theme[div_line]="#243854"
+
+# Temperature: Green -> Gold -> STi Cherry Red
+theme[temp_start]="#00E676"
+theme[temp_mid]="#FFF200"
+theme[temp_end]="#FF0055"
+
+# CPU graph: Deep Blue -> Sonic Blue -> 555 Neon Yellow
+theme[cpu_start]="#0A2A66"
+theme[cpu_mid]="#1255CC"
+theme[cpu_end]="#FFF200"
+
+# Mem/Disk meters
+theme[free_start]="#0A2A66"
+theme[free_mid]="#1255CC"
+theme[free_end]="#00E676"
+
+theme[cached_start]="#0A2A66"
+theme[cached_mid]="#1255CC"
+theme[cached_end]="#00D2FF"
+
+theme[available_start]="#D4AF37"
+theme[available_mid]="#FF8C00"
+theme[available_end]="#FF0055"
+
+theme[used_start]="#0A2A66"
+theme[used_mid]="#1255CC"
+theme[used_end]="#FFF200"
+
+# Network
+theme[download_start]="#0A2A66"
+theme[download_mid]="#1255CC"
+theme[download_end]="#00D2FF"
+
+theme[upload_start]="#0A2A66"
+theme[upload_mid]="#D4AF37"
+theme[upload_end]="#FFF200"
+
+# Process usage gradient
+theme[process_start]="#1255CC"
+theme[process_mid]="#D4AF37"
+theme[process_end]="#FFF200"

@@ -1,0 +1,10 @@
+/* Colin McRae Tribute — GTK4 Applications Styling
+ * Tribute to Colin McRae MBE & Nicky Grist — 1997 Subaru Impreza WRC97 (P2 WRC)
+ */
+
+window.background,
+.view, listview, gridview, columnview,
+scrolledwindow, viewport {
+  background-color: rgba(11, 16, 29, 0.28);
+  background-image: none;
+}

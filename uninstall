@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# Colin McRae Tribute — Theme Uninstaller
+# Tribute to Colin McRae MBE & Nicky Grist — 1997 Subaru Impreza WRC97 (P2 WRC)
+
+set -euo pipefail
+
+TARGET_DIR="$HOME/.config/omarchy/themes/colinmcrae-tribute"
+HOOK_FILE="$HOME/.config/omarchy/hooks/theme-set.d/colinmcrae-tribute"
+
+echo "=== Removing Colin McRae Tribute Theme ==="
+
+if [[ -f "$HOOK_FILE" ]]; then
+  echo "Reverting hooks..."
+  bash "$HOOK_FILE" "none" || true
+  rm -f "$HOOK_FILE"
+  echo "✔ Removed hook: $HOOK_FILE"
+fi
+
+if [[ -L "$TARGET_DIR" || -d "$TARGET_DIR" ]]; then
+  rm -rf "$TARGET_DIR"
+  echo "✔ Removed theme link/dir: $TARGET_DIR"
+fi
+
+echo "Done."
