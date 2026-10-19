@@ -31,10 +31,10 @@ BarWidget {
 
   function focusWorkspace(id) {
     if (!root.bar) return
-    root.bar.run("hyprctl dispatch workspace " + id)
+    root.bar.run("hyprctl dispatch " + Util.shellQuote("hl.dsp.focus({ workspace = \"" + id + "\" })"))
   }
 
-  readonly property real trailingGap: root.vertical ? 0 : Style.spaceReal(2)
+  readonly property real trailingGap: root.vertical ? 0 : Style.spaceReal(1.5)
 
   implicitWidth: grid.implicitWidth + trailingGap
   implicitHeight: grid.implicitHeight
@@ -44,57 +44,37 @@ BarWidget {
     anchors.fill: parent
     anchors.rightMargin: root.trailingGap
     columns: root.vertical ? 1 : root.workspaceIds().length
-    columnSpacing: root.vertical ? 0 : Style.space(2)
+    columnSpacing: root.vertical ? 0 : Style.space(1)
     rowSpacing: root.vertical ? Style.space(2) : 0
 
     Repeater {
       model: root.workspaceIds()
 
-      Item {
+      WidgetButton {
         required property int modelData
+
         readonly property var workspace: root.workspaceById(modelData)
         readonly property bool occupied: workspace !== null && workspace.toplevels.values.length > 0
         readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
-        width: root.vertical ? root.barSize : Style.space(22)
-        height: root.barSize
+        bar: root.bar
+        // Clean numeric digits 1, 2, 3... perfectly aligned with the clock and weather text
+        text: modelData === 10 ? "0" : String(modelData)
 
-        Rectangle {
-          id: pill
-          anchors.centerIn: parent
-          width: parent.width - 2
-          height: 18
-          radius: 3
+        // Color scheme:
+        // Focused/Active: Speedline Gold (#D4AF37)
+        // Occupied (windows running): SWRT Light Cyan/Blue (#70B8FF)
+        // Empty: Muted Rally Blue (#3B5377)
+        foreground: focused ? "#D4AF37" : (occupied ? "#70B8FF" : "#3B5377")
 
-          // Active = Speedline Gold rim tint background; Occupied = SWRT subtle blue wash; Empty = transparent
-          color: focused ? "rgba(212, 175, 55, 0.28)" : (occupied ? "rgba(18, 85, 204, 0.20)" : "transparent")
-          border.color: focused ? "#D4AF37" : (occupied ? "rgba(76, 107, 153, 0.45)" : "transparent")
-          border.width: focused ? 1 : (occupied ? 1 : 0)
+        // No box, no square, pure text numbers with native BarWidget alignment
+        opacity: focused || occupied ? 1.0 : 0.45
+        horizontalMargin: 6
+        verticalPadding: 6
+        fixedWidth: root.vertical ? root.barSize : Style.space(20)
+        fixedHeight: root.barSize
 
-          Behavior on color { ColorAnimation { duration: 140 } }
-          Behavior on border.color { ColorAnimation { duration: 140 } }
-
-          Text {
-            anchors.centerIn: parent
-            text: modelData === 10 ? "0" : String(modelData)
-            font.family: "JetBrainsMono Nerd Font"
-            font.pixelSize: 11
-            font.bold: focused || occupied
-            renderType: Text.NativeRendering
-
-            // Active/focused = Speedline Gold (#D4AF37 / #E5C158)
-            // Occupied with windows = SWRT Cyan/White (#66D9FF)
-            // Empty = Subtle Muted Blue (#4C6B99)
-            color: focused ? "#E5C158" : (occupied ? "#70B8FF" : "#3B5377")
-          }
-        }
-
-        MouseArea {
-          anchors.fill: parent
-          hoverEnabled: true
-          cursorShape: Qt.PointingHandCursor
-          onClicked: root.focusWorkspace(modelData)
-        }
+        onPressed: function() { root.focusWorkspace(modelData) }
       }
     }
   }
