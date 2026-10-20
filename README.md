@@ -77,6 +77,13 @@ The `backgrounds/` folder contains curated wallpapers of `P2 WRC`:
 5. `5-mcrae-engine.jpg` — Engine bay with twin-scroll turbo and gold canisters
 6. `6-mcrae-cockpit.jpg` — Carbon switchboard with "PULL FOR HOT" knob (Lockscreen)
 7. `7-mcrae-wing.jpg` — Macro detail of the rally rear wing and sponsor decals
+8. `8-mcrae-flat-out.jpg` — Head-on through the dust on a forest stage
+9. `9-mcrae-forest-dust.jpg` — Sliding out of the trees in a cloud of gravel
+10. `10-mcrae-forest-stage.jpg` — Wide woodland shot, car small in the trees
+11. `11-mcrae-goodwood-555.jpg` — Side profile of the #1 555 car at speed
+12. `12-mcrae-goodwood-one.jpg` — 1996 #1 car on the Goodwood hillclimb
+
+Wallpapers 8–12 are from Wikimedia Commons under CC BY / CC BY-SA; see [`backgrounds/CREDITS.md`](backgrounds/CREDITS.md).
 
 ---
 
