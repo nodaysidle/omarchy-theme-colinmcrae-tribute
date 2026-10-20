@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "colinmcrae.stage-hud",
+  "name": "McRae Stage HUD",
+  "version": "1.0.0",
+  "author": "nodaysidle",
+  "license": "MIT",
+  "description": "Rally stage HUD: uptime as stage time, CPU package temperature as water temp",
+  "kinds": [
+    "bar-widget"
+  ],
+  "activation": "on-demand",
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "McRae Stage HUD",
+    "description": "Stage time and water temp",
+    "category": "Status",
+    "allowMultiple": false,
+    "defaultSection": "left"
+  }
+}

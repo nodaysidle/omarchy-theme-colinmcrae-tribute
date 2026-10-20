@@ -44,7 +44,7 @@ active_border = {
 }
 ```
 
-* **Animation:** Loop animation on `borderangle` (`speed = 36`) creating a crisp, high-speed rally night stage auxiliary lamp sweep.
+* **Animation:** One sweep on `borderangle` each time a window takes focus (`style = "once"`). A looping sweep redraws every frame forever and keeps integrated GPUs awake, so the beam only fires when you change windows.
 * **Border Size:** `4px` illuminated beam for maximum presence against frosted dark glass.
 * **Inactive Windows:** Muted stealth carbon weave with faint navy transition (`rgba(070B1499)`).
 
@@ -56,15 +56,13 @@ Included directly in the theme repository:
 
 1. **`colinmcrae.wrc-badge`**: Centered tribute badge featuring the authentic **P2 WRC Subaru World Rally Team crescent emblem** (with 3D cyan extrusion) alongside 555 insignia and STi red racing tab. Left-click fires Colin's iconic *"If in doubt, flat out"* notification.
 2. **`colinmcrae.workspaces`**: Clean, borderless workspace switcher with native optical alignment:
-   - **Active:** Gleaming **Speedline Gold (`#D4AF37`)**
+   - **Active:** Gleaming **Speedline Gold (`#D4AF37`)**, labelled as a stage (`SS3`)
    - **Occupied:** Warm **Muted Gold (`#C5A059`)**
    - **Unused:** Soft **SWRT Rally Blue (`#3B6DB5`)**
-3. **Hyprland:** Superellipse continuous-curvature corners (`rounding = 18`, `power = 4.5`), specular inner rim reflection (`glow` with gold/sonic tint), and 3-pass high-vibrancy backdrop blur.
-4. **Waybar:** Floating pill with deep Sonic Blue translucent gradient, Speedline Gold hairline edge, and glowing 555 Neon Yellow active workspace indicator.
-5. **Ghostty & Terminals:** 84% translucent midnight blue background with 20px blur, vibrant Subaru WRC ANSI palette, and a 555 yellow block cursor.
-6. **Walker Launcher:** Glass acrylic panel with gold bevel, recessed search well, and glowing neon yellow selection.
-7. **Mako Notifications & SwayOSD:** Frosted popups with Speedline Gold borders and yellow progress indicators (`[urgency=high]` fires with STi Cherry Red).
-8. **Btop:** Transparent terminal passthrough styled after MoTeC rally telemetry.
+3. **`colinmcrae.stage-hud`**: Rally HUD for the bar. Uptime shows as stage time (`SS 03:42`), CPU package temperature as water temp in 555 yellow, turning STi Cherry Red at 85°C. Click the stage time for a pace note. Polls once every 30 s.
+4. **Hyprland:** Superellipse continuous-curvature corners (`rounding = 18`, `power = 4.5`), specular inner rim reflection (`glow` with gold/sonic tint), and 2-pass high-vibrancy backdrop blur. Notifications, OSD and reminders get the frosted blur.
+5. **Foot:** 92% translucent midnight blue background with blur, Subaru WRC ANSI palette, and a 555 yellow block cursor.
+6. **Btop:** Transparent terminal passthrough styled after MoTeC rally telemetry.
 
 ---
 

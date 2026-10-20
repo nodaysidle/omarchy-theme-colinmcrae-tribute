@@ -58,8 +58,10 @@ BarWidget {
         readonly property bool focused: Hyprland.focusedWorkspace !== null && Hyprland.focusedWorkspace.id === modelData
 
         bar: root.bar
-        // Clean numeric digits 1, 2, 3...
-        text: modelData === 10 ? "0" : String(modelData)
+        // Stage numbers: the focused workspace reads "SS3", the rest stay bare digits.
+        readonly property string digit: modelData === 10 ? "0" : String(modelData)
+        text: focused ? "SS" + digit : digit
+        readonly property real stageWidth: focused ? Style.space(34) : Style.space(20)
 
         // Exact requested color scheme:
         // - Active/Focused (current desktop): Bright Speedline Gold (#D4AF37)
@@ -71,7 +73,7 @@ BarWidget {
         opacity: focused ? 1.0 : (occupied ? 0.90 : 0.55)
         horizontalMargin: 6
         verticalPadding: 6
-        fixedWidth: root.vertical ? root.barSize : Style.space(20)
+        fixedWidth: root.vertical ? root.barSize : stageWidth
         fixedHeight: root.barSize
 
         onPressed: function() { root.focusWorkspace(modelData) }

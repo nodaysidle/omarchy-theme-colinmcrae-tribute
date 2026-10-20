@@ -5,7 +5,7 @@
 --   - "Night Special Stage" laser sweep: stealth carbon base with focused 555 Yellow + Gold + STi Red beam
 --   - Frosted motorsport glass with illuminated specular inner glow
 --   - Superellipse continuous curvature window corners (power 4.5, rounding 18)
---   - Precision layer blurs for Waybar, Walker, and Notifications
+--   - Single sweep on focus change (no idle redraws on the iGPU)
 
 -- ── "Night Special Stage" Laser Sweep Gradient ──
 -- 75% stealth carbon, 25% concentrated high-intensity rally light beam
@@ -70,14 +70,15 @@ hl.config({
     active_opacity = 1.0,
     inactive_opacity = 1.0,
 
-    dim_inactive = true,
-    dim_strength = 0.06,
+    -- Dimming re-renders every unfocused surface; the carbon inactive border
+    -- already separates windows.
+    dim_inactive = false,
     dim_special = 0.35,
 
     blur = {
       enabled = true,
-      size = 5,
-      passes = 3,
+      size = 6,
+      passes = 2,
       brightness = 1.16,
       contrast = 1.16,
       vibrancy = 0.82,
@@ -97,8 +98,8 @@ hl.config({
     -- ── Specular Inner Rim Light ──
     glow = {
       enabled = true,
-      range = 14,
-      render_power = 2,
+      range = 10,
+      render_power = 3,
       color = {
         colors = { "rgba(FFF20038)", "rgba(1255CC1F)" }, -- Neon Yellow into Sonic Blue sheen
         angle = 90,
@@ -121,18 +122,20 @@ hl.config({
   },
 })
 
--- ── Laser Sweep Smooth Continuous Loop Animation ──
-hl.animation({
-  leaf = "borderangle",
-  enabled = true,
-  speed = 36, -- Crisp purposeful sweep (~5.5s per loop)
-  bezier = "linear",
-  style = "loop",
-})
-
 -- ── Motion Curves ──
 hl.curve("glassSettle", { type = "bezier", points = { { 0.16, 1.0 }, { 0.3, 1.0 } } })
 hl.curve("glassDismiss", { type = "bezier", points = { { 0.42, 0.0 }, { 1.0, 1.0 } } })
+
+-- ── Laser Sweep: one pass per focus change ──
+-- A "loop" style redraws every frame forever (120 fps on the Odyssey G5) and
+-- keeps the Arc iGPU awake; "once" sweeps when a window takes focus, then idles.
+hl.animation({
+  leaf = "borderangle",
+  enabled = true,
+  speed = 14,
+  bezier = "glassSettle",
+  style = "once",
+})
 
 hl.animation({ leaf = "layersIn", enabled = true, speed = 3.5, bezier = "glassSettle", style = "fade" })
 hl.animation({ leaf = "layersOut", enabled = true, speed = 2, bezier = "glassDismiss", style = "fade" })
@@ -144,7 +147,5 @@ o.window({ tag = "chromium-based-browser" }, { opacity = "0.93 0.90" })
 o.window({ tag = "firefox-based-browser" }, { opacity = "0.93 0.90" })
 
 -- ── Layer Surface Blurs ──
-hl.layer_rule({ match = { namespace = "waybar" }, blur = true, ignore_alpha = 0.04, blur_popups = true })
-hl.layer_rule({ match = { namespace = "walker" }, blur = true, ignore_alpha = 0.35 })
-hl.layer_rule({ match = { namespace = "notifications" }, blur = true, ignore_alpha = 0.06 })
-hl.layer_rule({ match = { namespace = "swayosd" }, blur = true, ignore_alpha = 0.06 })
+-- omarchy-bar and the menus are blurred in ~/.config/hypr/looknfeel.lua.
+hl.layer_rule({ match = { namespace = "^(omarchy-notifications|omarchy-osd|omarchy-reminders)$" }, blur = true, ignore_alpha = 0.06 })
